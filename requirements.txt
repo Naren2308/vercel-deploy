@@ -4,7 +4,7 @@ asttokens==2.4.1
 astunparse==1.6.3
 blinker==1.8.2
 brewer2mpl==1.4.1
-Cartopy==0.23.1  # Updated to a version compatible with Python 3.12
+Cartopy==0.23.0  # Updated to a version compatible with Python 3.12
 certifi==2024.2.2
 charset-normalizer==3.3.2
 click==8.1.7
