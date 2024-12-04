@@ -1,19 +1,9 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "main.py",
-      "use": "@vercel/python"
-    }
-  ],
   "routes": [
     {
       "src": "/static/predictions/(.*)",
       "dest": "/static/predictions/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "main.py"
     }
   ]
 }
