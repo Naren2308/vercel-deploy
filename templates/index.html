@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Stock Price Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .card {
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+        .card-header {
+            font-weight: bold;
+            text-align: left;
+        }
+        .prediction-table {
+            margin-top: 20px;
+        }
+        .prediction-table th, .prediction-table td {
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #007bff;
+        }
+        .prediction-image {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .prediction-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .insights-card {
+            margin-top: 30px;
+        }
+        .insights-card .card {
+            width: 100%;
+            max-width: 600px;
+        }
+        .insights-card {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center">Netflix Stock Price Prediction</h1>
+
+    <!-- Custom Date Input Form -->
+    <div class="card">
+        <div class="card-header">
+            Enter Custom Dates for Prediction
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="dates">Enter Dates (dd-mm-yyyy) separated by commas:</label>
+                    <input type="text" class="form-control" id="dates" name="dates" placeholder="e.g. 01-12-2024, 25-12-2024" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Display Predictions -->
+    {% if predictions %}
+        <div class="card">
+            <div class="card-header">
+                Predicted Prices for Custom Dates
+            </div>
+            <div class="card-body">
+                <table class="table table-striped prediction-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Predicted Price (USD)</th>
+                            <th>Change (USD)</th>
+                            <th>Percentage Change (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for date, price, change, pct_change in predictions %}
+                            <tr>
+                                <td>{{ date }}</td>
+                                <td>${{ '%.2f' % price }}</td>
+                                <td>${{ '%.2f' % change }}</td>
+                                <td>{{ '%.2f' % pct_change }}%</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Display Prediction Image -->
+        <div class="prediction-image">
+            <h3>Price Prediction Graph</h3>
+            <img src="{{ url_for('display_image', filename=image_url) }}" alt="Prediction Graph">
+        </div>
+    {% endif %}
+
+    <!-- Insights Section -->
+    <div class="insights-card">
+        <div class="card">
+            <div class="card-header">
+                Stock Insights (Last 120 Days)
+            </div>
+            <div class="card-body">
+                <p>First Price: ${{ insights.first_price }}</p>
+                <p>Last Price: ${{ insights.last_price }}</p>
+                <p>Price Change: ${{ insights.price_change }} ({{ insights.percentage_change }}%)</p>
+                <p>The stock price has {{ insights.trend }} over the last 120 days.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
