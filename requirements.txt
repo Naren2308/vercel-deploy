@@ -85,8 +85,6 @@ pyproj==3.6.1
 pyshp==2.3.1
 python-dateutil==2.9.0.post0
 pytz==2024.1
-pywin32==308
-pywin32-ctypes==0.2.2
 pyzmq==26.0.3
 readme_renderer==43.0
 requests==2.31.0
